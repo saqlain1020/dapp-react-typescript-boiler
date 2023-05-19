@@ -7,7 +7,15 @@ import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum, goerli, bsc, bscTestnet, sepolia],
-  [publicProvider()]
+  [publicProvider()],
+  {
+    batch: {
+      multicall: {
+        batchSize: 150,
+        wait: 500,
+      },
+    },
+  }
 );
 
 const { connectors } = getDefaultWallets({

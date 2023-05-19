@@ -8,10 +8,10 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { WagmiConfig } from "wagmi";
 import { chains, wagmiConfig } from "./config/walletConfig";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import WalletProvider from "./context/WalletProvider";
 // import viteLogo from "/vite.svg";
 
 function App() {
-  console.log(import.meta.env);
   return (
     <>
       <CssBaseline />
@@ -20,7 +20,9 @@ function App() {
           <ThemeProvider theme={lightTheme}>
             <WagmiConfig config={wagmiConfig}>
               <RainbowKitProvider chains={chains}>
-                <Body />
+                <WalletProvider>
+                  <Body />
+                </WalletProvider>
               </RainbowKitProvider>
             </WagmiConfig>
           </ThemeProvider>
@@ -31,6 +33,5 @@ function App() {
 }
 
 export default App;
-
 
 
