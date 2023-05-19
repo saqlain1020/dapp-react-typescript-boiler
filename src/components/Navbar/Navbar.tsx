@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { AppBar, Button, Theme, Typography } from "@mui/material";
+import { AppBar, Theme, Typography } from "@mui/material";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,7 +25,7 @@ const Navbar: React.FC<IProps> = () => {
         <Typography variant="h4">
           <b>Navbar</b>
         </Typography>
-        <Button variant="contained">Connect</Button>
+        <ConnectButton />
       </div>
     </AppBar>
   );
