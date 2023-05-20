@@ -5,15 +5,17 @@ This boilerplate code provides a solid foundation for developing decentralized a
 
 It has builtin support for `Mui5` with customizations and is using `Vite` with `SWC` which makes it super fast in developement
 
-Redux store is managed with the architecture focused on multichain data handling and fetching, Tokens balance fetching is implemented and can be used as a referrence for other data requirements.
+Redux store is managed with the architecture focused on multichain data handling and fetching, Tokens balance fetching is implemented and can be used as a reference for other data requirements.
 ## Features
 
+- `Super Fast Development Server`
 - Multichain Support
 - Major Wallets Support
 - Mui 5 (with theme customization)
 - React
 - Vite (SWC)
 - Redux toolkit
+- Pages Routing
 - Wagmi
 - Veim
 - Rainbowkit
@@ -24,6 +26,11 @@ Redux store is managed with the architecture focused on multichain data handling
 - Absolute Paths
 - Prettier formating
 
+
+
+## Demo
+
+https://harmonious-khapse-d70151.netlify.app/
 
 
 ## Getting Started

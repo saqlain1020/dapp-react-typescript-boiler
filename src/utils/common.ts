@@ -15,3 +15,21 @@ export const toEth = (value: bigint | string, decimals = 18) => {
 export const toAddress = (address: string) => {
   return getAddress(address);
 };
+
+type AwaitTransactionResponse = { status: true; txHash: string } | { status: false; error: string };
+
+export const awaitTransaction = async (tx: Promise<`0x${string}`>): Promise<AwaitTransactionResponse> => {
+  try {
+    const txHash = await tx;
+    return {
+      status: true,
+      txHash,
+    };
+  } catch (error: any) {
+    console.log("Await Transaction Error: ", error);
+    return {
+      status: false,
+      error: error.shortMessage as string,
+    };
+  }
+};
