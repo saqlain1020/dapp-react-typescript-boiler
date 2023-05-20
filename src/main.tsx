@@ -22,13 +22,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NotificationsProvider>
-          <App />
-          <Notifications />
-        </NotificationsProvider>
+        <Notifications />
+        <App />
       </PersistGate>
     </Provider>
   </React.StrictMode>
 );
+
+
 
 

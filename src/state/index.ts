@@ -4,10 +4,12 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage";
 import decimalsReducer from "./decimals/decimalsReducer";
 import balancesReducer from "./balances/balancesReducer";
+import { reducer as notificationsReducer } from "reapop";
 
 const persistedDecimalReducer = persistReducer({ key: "decimals", version: 1, storage }, decimalsReducer);
 
 const rootReducer = combineReducers({
+  notifications: notificationsReducer(),
   balances: balancesReducer,
   decimals: persistedDecimalReducer,
 });

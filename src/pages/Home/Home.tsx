@@ -1,19 +1,18 @@
 import React from "react";
-import { Container, Typography, ListItemText, ListItem, Button } from "@mui/material";
+import { Container, Typography, ListItemText, ListItem, Button, Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 import useWallet from "src/hooks/useWallet";
 import useBalances from "src/hooks/useBalances";
 import useDecimals from "src/hooks/useDecimals";
 import { toEth } from "src/utils/common";
-import useNotify from "src/hooks/useNotify";
+import { dismissNotifyAll, notifyError, notifyLoading, notifySuccess } from "src/api/notifications";
 
 interface IProps {}
 
 const Home: React.FC<IProps> = () => {
   const { balance, displayAccount, currentAddress } = useWallet();
-  const { balances } = useBalances();
+  const { balances, isLoading } = useBalances();
   const { decimals } = useDecimals();
-  const { notifySuccess, notifyError, notifyLoading, dismissNotifyAll } = useNotify();
 
   return (
     <Container maxWidth="xl">
@@ -30,16 +29,15 @@ const Home: React.FC<IProps> = () => {
       <Link to="/test">Test</Link>
       <Typography variant="h5">Balances:-</Typography>
       {balances &&
+        !isLoading &&
         Object.entries(balances).map(([address, balance]) => (
           <ListItem key={address}>
             <ListItemText>
-              {/* asd */}
-              {/* <Typography key={address}> */}
               <b>Address:</b> {address} <b>Balance:</b> {toEth(balance, decimals && decimals[address])}
-              {/* </Typography> */}
             </ListItemText>
           </ListItem>
         ))}
+      {isLoading && <Skeleton height={200} />}
       <Typography variant="h5">Notifications</Typography>
       <Button
         variant="outlined"
@@ -70,22 +68,7 @@ const Home: React.FC<IProps> = () => {
       >
         loading
       </Button>
-      <Button
-        variant="outlined"
-        sx={{ mr: 2 }}
-        onClick={() => {
-          notifyLoading("Approving!", "Please wait...", {
-            buttons: [
-              {
-                name: "View",
-                onClick: () => {},
-              },
-            ],
-          });
-        }}
-      >
-        btns
-      </Button>
+
       <Button
         variant="outlined"
         sx={{ mr: 2 }}

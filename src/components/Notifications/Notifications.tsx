@@ -1,8 +1,9 @@
 import React from "react";
-import NotificationsSystem, { useNotifications, baseTheme, atalhoTheme, Notification, Theme } from "reapop";
+import NotificationsSystem, { dismissNotification, baseTheme, atalhoTheme, Notification, Theme } from "reapop";
 import NotiCheck from "src/assets/images/noti_check.png";
 import NotiCross from "src/assets/images/noti_cross.png";
 import styles from "./Notifications.module.css";
+import { useAppDispatch, useAppSelector } from "src/state";
 
 interface IProps {}
 
@@ -80,13 +81,16 @@ function getTheme() {
 
 const Notifications: React.FC<IProps> = () => {
   // 1. Retrieve the notifications to display, and the function used to dismiss a notification.
-  const { notifications, dismissNotification } = useNotifications();
+  const dispatch = useAppDispatch();
+  // 1. Retrieve the notifications to display.
+  const notifications = useAppSelector((state) => state.notifications);
+
   return (
     <NotificationsSystem
       // 2. Pass the notifications you want Reapop to display.
       notifications={notifications}
       // 3. Pass the function used to dismiss a notification.
-      dismissNotification={(id) => dismissNotification(id)}
+      dismissNotification={(id) => dispatch(dismissNotification(id))}
       // 4. Pass a builtIn theme or a custom theme.
       theme={getTheme()}
       components={{
