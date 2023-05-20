@@ -15,7 +15,7 @@ interface IProps {}
 
 const Test: React.FC<IProps> = () => {
   const classes = useStyles();
-  const { publicClient, currentAddress, walletClient } = useWallet();
+  const { currentAddress, walletClient } = useWallet();
 
   const fn = async () => {
     try {
@@ -38,7 +38,7 @@ const Test: React.FC<IProps> = () => {
   return (
     <div className={classes.root}>
       Test Page
-      <Button onClick={fn}>Get Balance</Button>
+      <Button onClick={fn}>Transfer</Button>
     </div>
   );
 };

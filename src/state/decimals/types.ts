@@ -14,6 +14,6 @@ export interface FetchDecimalsActionArgs {
 
 export interface Decimals {
   [chainId: number]: {
-    [address: `0x${string}`]: number;
+    [address: string]: number;
   };
 }

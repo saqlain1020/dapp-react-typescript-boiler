@@ -8,8 +8,8 @@ export const toWei = (value: `${number}`, decimals = 18) => {
   return parseUnits(value, decimals);
 };
 
-export const toEth = (value: bigint, decimals = 18) => {
-  return formatUnits(value, decimals);
+export const toEth = (value: bigint | string, decimals = 18) => {
+  return formatUnits(BigInt(value), decimals);
 };
 
 export const toAddress = (address: string) => {

@@ -15,6 +15,6 @@ export interface FetchBalancesActionArgs {
 
 export interface Balances {
   [chainId: number]: {
-    [address: `0x${string}`]: string;
+    [address: string]: string;
   };
 }
