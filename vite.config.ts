@@ -6,6 +6,7 @@ export default defineConfig({
   envPrefix: "REACT_APP_", // default: VITE_
   server: {
     port: 3000,
+    open: true,
   },
   plugins: [react()],
   resolve: {

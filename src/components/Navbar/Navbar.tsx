@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { AppBar, Theme, Typography } from "@mui/material";
+import { AppBar, Container, Theme, Typography } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -21,12 +21,12 @@ const Navbar: React.FC<IProps> = () => {
 
   return (
     <AppBar className={classes.root} sx={{ p: 2 }}>
-      <div className={classes.container}>
+      <Container maxWidth="xl" className={classes.container}>
         <Typography variant="h4">
           <b>Navbar</b>
         </Typography>
         <ConnectButton />
-      </div>
+      </Container>
     </AppBar>
   );
 };

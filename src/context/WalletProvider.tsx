@@ -1,6 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
-import * as ethers from "ethers";
-import { defaultChainId } from "src/config/constants";
+import React from "react";
 import {
   useAccount,
   useDisconnect,
@@ -16,18 +14,17 @@ import {
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { truncateAddress } from "src/utils/common";
 import { FetchBalanceResult } from "wagmi/actions";
-import { GetWalletClientResult } from "@wagmi/core";
 
 interface IWalletContext {
   /**
    * The current connect wallet address
    */
-  currentAddress: string;
+  currentAddress?: `0x${string}`;
 
   /**
    * The current connected wallet address truncated
    */
-  displayAccount: string;
+  displayAccount?: string;
 
   /**
    * Connect wallet modal open for connecting any wallet
@@ -46,7 +43,7 @@ interface IWalletContext {
    */
   logout: () => void;
   publicClient: PublicClient;
-  walletClient?: GetWalletClientResult;
+  walletClient?: WalletClient;
   /**
    * Balance of the native eth that the user has
    */
@@ -99,13 +96,13 @@ const WalletProvider: React.FC<IProps> = ({ children }) => {
   return (
     <WalletContext.Provider
       value={{
-        currentAddress: currentAddress || "",
+        currentAddress,
         connectWallet,
         chainId,
         logout,
         displayAccount,
         publicClient,
-        walletClient,
+        walletClient: walletClient ? walletClient : undefined,
         balance,
         switchNetworkAsync,
         chains,

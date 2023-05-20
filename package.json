@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -16,9 +16,12 @@
     "@mui/material": "^5.13.1",
     "@mui/styles": "^5.13.1",
     "@rainbow-me/rainbowkit": "^1.0.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
+    "redux-persist": "^6.0.0",
     "viem": "^0.3.31",
     "wagmi": "^1.0.5"
   },

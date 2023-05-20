@@ -11,7 +11,7 @@ const { chains, publicClient } = configureChains(
   {
     batch: {
       multicall: {
-        batchSize: 150,
+        batchSize: 4096,
         wait: 500,
       },
     },

@@ -6,8 +6,8 @@ import useWallet from "src/hooks/useWallet";
 interface IProps {}
 
 const Home: React.FC<IProps> = () => {
-  const { balance, publicClient, displayAccount, currentAddress } = useWallet();
-
+  const { balance, publicClient, walletClient, displayAccount, currentAddress } = useWallet();
+  console.log(publicClient, walletClient);
   return (
     <div>
       <h1>Root Page</h1>
