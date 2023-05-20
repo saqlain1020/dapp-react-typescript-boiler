@@ -4,8 +4,7 @@ import { Button, Theme } from "@mui/material";
 import { erc20Abi } from "src/assets/abis/erc20";
 import useWallet from "src/hooks/useWallet";
 import { getContract } from "wagmi/actions";
-import { toEth, toWei } from "src/utils/common";
-import { useWalletClient } from "wagmi";
+import { toWei } from "src/utils/common";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
