@@ -11,7 +11,7 @@ interface IProps {}
 
 const Home: React.FC<IProps> = () => {
   const { balance, displayAccount, currentAddress } = useWallet();
-  const { balances, isLoading } = useBalances();
+  const { balances, isLoading, isFetching } = useBalances();
   const { decimals } = useDecimals();
 
   return (
@@ -37,7 +37,7 @@ const Home: React.FC<IProps> = () => {
             </ListItemText>
           </ListItem>
         ))}
-      {isLoading && <Skeleton height={200} />}
+      {isFetching && <Skeleton height={200} />}
       <Typography variant="h5">Notifications</Typography>
       <Button
         variant="outlined"

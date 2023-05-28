@@ -15,7 +15,7 @@ const useBalances = () => {
   }, [chainId, balancesByChainId]);
 
   const reloadBalances = useCallback(() => {
-    if (!chainId || !currentAddress) {
+    if (!chainId || !currentAddress || !CONTRACTS[chainId]) {
       dispatch(resetBalances);
       return;
     }
@@ -23,7 +23,15 @@ const useBalances = () => {
     dispatch(fetchBalances({ addresses, publicClient, chainId, currentAddress }));
   }, [chainId, dispatch, publicClient, currentAddress]);
 
-  return { isLoading: isLoading && !isFetched, isFetched, isFetching: isLoading, balances, reloadBalances };
+  return {
+    /** Only true for first time data fetching */
+    isLoading: isLoading && !isFetched,
+    isFetched,
+    /** True whenever data is being fetched */
+    isFetching: isLoading,
+    balances,
+    reloadBalances,
+  };
 };
 
 export default useBalances;

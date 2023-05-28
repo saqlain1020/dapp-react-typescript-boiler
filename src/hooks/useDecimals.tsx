@@ -15,7 +15,8 @@ const useDecimals = () => {
   }, [chainId, decimalsByChainId]);
 
   const reloadDecimals = useCallback(() => {
-    if (!chainId) return;
+    if (!chainId || !CONTRACTS[chainId]) return;
+
     const addresses: string[] = Object.values(CONTRACTS[chainId]);
     dispatch(fetchDecimals({ addresses, publicClient, chainId }));
   }, [chainId, dispatch, publicClient]);

@@ -14,6 +14,7 @@ import {
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { truncateAddress } from "src/utils/common";
 import { FetchBalanceResult } from "wagmi/actions";
+import { providers } from "ethers";
 
 interface IWalletContext {
   /**
@@ -50,6 +51,10 @@ interface IWalletContext {
   balance: FetchBalanceResult | undefined;
   switchNetworkAsync: ((chainId_?: number | undefined) => Promise<Chain>) | undefined;
   chains: Chain[];
+  /**
+   * Ether JS Signer for compatibility with ethers.js dependent libraries, advised against using this unless necessary
+   */
+  signer?: providers.JsonRpcSigner;
 }
 
 export const WalletContext = React.createContext<IWalletContext>({} as IWalletContext);
@@ -62,7 +67,8 @@ const WalletProvider: React.FC<IProps> = ({ children }) => {
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
   const { switchNetworkAsync, chains } = useSwitchNetwork();
-  const { address: currentAddress } = useAccount();
+  const [signer, setSigner] = React.useState<providers.JsonRpcSigner | undefined>();
+  const { address: currentAddress, connector } = useAccount();
   const { disconnect } = useDisconnect();
   const { chain } = useNetwork();
   const [chainId, setChainId] = React.useState<number>();
@@ -93,6 +99,26 @@ const WalletProvider: React.FC<IProps> = ({ children }) => {
     }
   }, [chain]);
 
+  React.useEffect(() => {
+    (async function () {
+      try {
+        const _provider = await connector?.getProvider();
+        if (!_provider) return setSigner(undefined);
+        const provider = new providers.Web3Provider(_provider);
+
+        const _signer = provider.getSigner();
+        if (_signer) {
+          setSigner(_signer);
+        } else {
+          setSigner(undefined);
+        }
+      } catch (error) {
+        console.log(error);
+        setSigner(undefined);
+      }
+    })();
+  }, [connector, chainId, currentAddress]);
+
   return (
     <WalletContext.Provider
       value={{
@@ -106,6 +132,7 @@ const WalletProvider: React.FC<IProps> = ({ children }) => {
         balance,
         switchNetworkAsync,
         chains,
+        signer,
       }}
     >
       {children}

@@ -15,8 +15,8 @@ interface IProps {}
 
 const Test: React.FC<IProps> = () => {
   const classes = useStyles();
-  const { currentAddress, walletClient } = useWallet();
-
+  const { currentAddress, walletClient, signer } = useWallet();
+  
   const fn = async () => {
     if (!currentAddress) return;
     const contract = getContract({
