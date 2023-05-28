@@ -7,9 +7,7 @@ import store, { persistor } from "./state";
 import { PersistGate } from "redux-persist/integration/react";
 import "./index.css";
 import Notifications from "./components/Notifications/Notifications.tsx";
-
-// Fix error on production mobile metamask connect
-window.global ||= window;
+import "./polyfills.ts";
 
 // Configuration for toast notifications
 setUpNotifications({
