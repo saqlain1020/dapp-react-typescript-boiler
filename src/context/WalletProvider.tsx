@@ -15,12 +15,13 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { truncateAddress } from "src/utils/common";
 import { FetchBalanceResult } from "wagmi/actions";
 import { providers } from "ethers";
+import { Address } from "viem";
 
 interface IWalletContext {
   /**
    * The current connect wallet address
    */
-  currentAddress?: `0x${string}`;
+  currentAddress?: Address;
 
   /**
    * The current connected wallet address truncated

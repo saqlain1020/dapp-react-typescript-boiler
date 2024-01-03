@@ -4,10 +4,16 @@ import { getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig } from "wagmi";
 import { mainnet, polygon, optimism, arbitrum, goerli, bsc, bscTestnet, sepolia } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+// import { alchemyProvider } from "wagmi/providers/alchemy";
 
 const { chains, publicClient } = configureChains(
+  // More chains can be added here
   [mainnet, polygon, optimism, arbitrum, goerli, bsc, bscTestnet, sepolia],
-  [publicProvider()],
+  [
+    // Input your alchemy key or use some other provider from wagmi/providers, publicProvider is unreliable
+    // alchemyProvider({apiKey: "Your Api Key"}),
+    publicProvider(),
+  ],
   {
     batch: {
       multicall: {
@@ -19,8 +25,11 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  // appName: should be name set in wallet connect dashboard
+  appName: "dapp-typescript-template",
+  // projectId can be obtained from https://cloud.walletconnect.com
+  // Remove projectId and use your own
+  projectId: "94c18b243cf8106f35fa1b73ebcfb242",
   chains,
 });
 
